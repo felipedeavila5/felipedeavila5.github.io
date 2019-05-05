@@ -11,9 +11,64 @@
 		  min-height: 100vh;
 		  background: #000;
 		}
+	   .gallery {
+		     width:100%;
+		     height:100%;
+		     position: relative;
+			 padding: 0;
+			 margin: 0;
+			text-align: center;
+		}
+
+		.gallery-image{
+			cursor:pointer;	
+			position: relative;
+			display: block;
+		}
+
+		.gallery-text{
+		    position: absolute;
+		    top: 0; right: 0;
+		    bottom: 0; left: 0;
+		    width: 100%;
+		    height: 100%; 
+		    text-align: center;
+		    background-color: rgba(0,0,0,0.8);
+		    opacity: 0;
+		    -webkit-transition: opacity 0.6s;
+		    -moz-transition: opacity 0.6s;
+		    transition: opacity 0.6s;
+	       vertical-align:middle;
+	       line-height:200px;
+		}
+
+		.gallery-text:hover{
+		    opacity: 1;      
+		}
+
+		.gallery-text h3{
+		    color: white;
+		    display: inline-table;
+	       vertical-align:middle;
+	       margin-top: 25%;
+	       line-height:100%; 
+	       font-size: 35px;           
+		}
 	</style>
 </head>
 <body>
-<img src="pag4.jpg">
+<div class="gallery">
+	<a href="index.html">
+	<div class="gallery-image">
+	  <img src="pag4.jpg">
+	  <div class="gallery-text">
+	  <h3>Não é possível definir nada neste mundo
+	  <br>Tente novamente
+	  </h3>	  	
+	  </div>    
+	</div> 
+	</a> 
+</div>
+
 </body>
 </html>
