@@ -10,6 +10,7 @@
 		  align-items: center;
 		  min-height: 100vh;
 		  background: #000;
+		  background-image:url('saw_capa.jpg');
 		}
 
 		.pergunta{
@@ -109,30 +110,103 @@
 			
 			
 		}
+		.ponto{
+			display: flex;
+			justify-content: center;
+		  	align-items: center;
+		  	font-size: 1.5rem;
+		  	color: white;
+		  	width: 100%;
+		  	position: absolute;
+		}
+		audio{
+			float: left;
+		}
 
 	   
 	</style>
 </head>
 <body>
-	<div class="pergunta">olá mundo? sdssdfsfsfsd fsfdfsdf sdfsdfsd sdsfsd dfsf</div>
+	<audio controls>
+	  <source src="saw.mp3" type="audio/mpeg">
+	Seu navegador não suporta esse elemento
+	</audio>
+	<div class="pergunta" id="pergunta1">olá mundo? sdssdfsfsfsd fsfdfsdf sdfsdfsd sdsfsd dfsf</div>
 	<br>
 	<div class="botoes">
-		<a class="verde" href="" onclick="verifica(true)">Verdadeiro</a>
-		<a class="vermelho" href="" onclick="verifica(false)">Falso</a>
+		<a class="verde" href="#" onclick="verifica(true)">Verdadeiro</a>
+		<a class="vermelho" href="#" onclick="verifica(false)">Falso</a>
 	</div>
+	<div class="ponto"><p id="ponto1">Pontuação: </p></div>
 	<script type="text/javascript">
-		var pag = 1;
-		function verifica(resposta) {
-			var correto = false;
-			if (pag == 1) {
-				correto = false
+		var perguntaAtual = 0;
+		var resposta = true;
+		var pontuacao = 0;
+		function mudapergunta(){
+			var texto = '';
+			perg = document.getElementById('pergunta1');
+			if(perguntaAtual == 0){
+				perg.innerHTML = 'Posso afirmar: "Eu gosto de estudar" <br> e "Não gosto de estudar" no mesmo mundo';
+				resposta = false;
 			}
-			if (resposta == correto) {
-				alert("acertou");
-			}else{
-				alert("errou");
+			if(perguntaAtual == 1){
+				perg.innerHTML = 'Necessariamente todo tatu bola se transforma em uma bola, <br> logo possivelmente há uma  bola que se transforma em um tatu bola';
+				resposta = true;
 			}
+			if (perguntaAtual == 2) {
+				perg.innerHTML = 'Em Joinvilândia nunca choveu e nunca choverá, <br> então necessariamente amanhã não irá chover';
+				resposta = true;
+			}
+			if (perguntaAtual == 3) {
+				perg.innerHTML = 'Depois de ontem é sempre possível que seja hoje';
+				resposta = true;
+			}
+			if (perguntaAtual == 4) {
+				perg.innerHTML = 'O avô chegou antes do pai.<br> O avô chegou antes do filho. <br> Então o pai possivelmente chegou antes do filho';
+				resposta = true;
+			}
+			if (perguntaAtual == 5) {
+				perg.innerHTML = 'Se levarei 7 dias viajando no tempo para o dia antes de ontem, <br> então obrigatoriamente levarei 7 dias viajando no tempo para o <br> dia depois de amanhã';
+				resposta = false;
+			}
+
+			if (perguntaAtual == 6) {
+				perg.innerHTML = 'Em todo momento no futuro é verdade que <br> em algum momento do passado você leu isso';
+				resposta = true;
+			}
+
+			if (perguntaAtual == 7) {
+				perg.innerHTML = 'Toda vez que eu viajava pela Estrada de Ouro Fino,<br> então de longe eu avistava a figura de um menino.<br> Para todo instante no futuro em que eu viajar pela Estrada de Ouro Fino,<br> vou avistar a figura de um menino';
+				resposta = false;
+			}
+
+			if (perguntaAtual == 8) {
+				perg.innerHTML = 'Toda vez que eu viajava pela Estrada de Ouro Fino,<br> então de longe eu avistava a figura de um menino.<br> Para todo instante no futuro em que eu viajar pela Estrada de Ouro Fino,<br> vou avistar a figura de um menino';
+				resposta = false;
+			}
+
+
+			perguntaAtual++;
 		}
+
+		mudapergunta();
+		var pag = 1;
+		function verifica(resposta_us) {
+			var ponto1 = document.getElementById('ponto1');
+			if (resposta == resposta_us) {
+				pontuacao = pontuacao+10;
+				ponto1.innerHTML = 'Pontuação: '+pontuacao;
+
+			}else{
+				if(pontuacao >=10){
+					pontuacao = pontuacao-10;
+					ponto1.innerHTML = 'Pontuação: '+pontuacao;
+				}
+			}
+			mudapergunta();
+		}
+
+		
 	</script>
 </body>
 </html>
