@@ -10,7 +10,7 @@
 		  align-items: center;
 		  min-height: 100vh;
 		  background: #000;
-		  background-image:url('saw_premium.jpg');
+		  background-image:url('saw_capa.jpg');
 		  background-repeat: no-repeat;
 		}
 
@@ -126,6 +126,12 @@
 			z-index: 1;
 		}
 
+		#premium{
+			margin-left: 0;
+			position: absolute;
+			margin-top: 80px;
+		}
+
 	   
 	</style>
 </head>
@@ -134,64 +140,61 @@
 	  <source src="saw.mp3" type="audio/mpeg">
 	Seu navegador não suporta esse elemento
 	</audio>
+	<a class="vermelho" id="premium" href="perg1.html" >+Jogos</a>
 	<div class="pergunta" id="pergunta1">olá mundo? sdssdfsfsfsd fsfdfsdf sdfsdfsd sdsfsd dfsf</div>
 	<br>
+
 	<div class="botoes" id="botoes">
 		<a class="verde" href="#" onclick="verifica(true)">Verdadeiro</a>
 		<a class="vermelho" href="#" onclick="verifica(false)">Falso</a>
 	</div>
-	<div class="ponto"><p id="ponto1">Pontuação: 0</p></div>
+	<div class="ponto"><p id="ponto1">Pontuação: </p></div>
 	<script type="text/javascript">
-		var perguntaAtual = 0;
+		var perguntaAtual = 1;
 		var resposta = true;
 		var pontuacao = 0;
 		function mudapergunta(){
 			var texto = '';
 			perg = document.getElementById('pergunta1');
-			if(perguntaAtual == 0){
-				perg.innerHTML = 'Posso afirmar: "Eu gosto de estudar" <br> e "Não gosto de estudar" no mesmo mundo';
-				resposta = false;
-			}
+			
 			if(perguntaAtual == 1){
-				perg.innerHTML = 'Necessariamente todo tatu bola se transforma em uma bola, <br> logo possivelmente há uma  bola que se transforma em um tatu bola';
+				perg.innerHTML = 'Se OPAT é uma matéria obrigatória, <br> então não é permitido não cursar opat?';
 				resposta = true;
 			}
 			if (perguntaAtual == 2) {
-				perg.innerHTML = 'Em Joinvilândia nunca choveu e nunca choverá, <br> então necessariamente amanhã não irá chover';
+				perg.innerHTML = 'Se é necessário que se penso, logo existo,<br> então não é possível pensar e não existir';
 				resposta = true;
 			}
 			if (perguntaAtual == 3) {
-				perg.innerHTML = 'Depois de ontem é sempre possível que seja hoje';
+				perg.innerHTML = 'É obrigatório proibir, então não é possível não proibir';
 				resposta = true;
 			}
 			if (perguntaAtual == 4) {
-				perg.innerHTML = 'O avô chegou antes do pai.<br> O avô chegou antes do filho. <br> Então o pai possivelmente chegou antes do filho';
-				resposta = true;
+				perg.innerHTML = 'A seguinte afirmação está correta?<br><img width=200px; src="img.png">';
+				resposta = false;
 			}
 			if (perguntaAtual == 5) {
-				perg.innerHTML = 'Se levarei 7 dias viajando no tempo para o dia antes de ontem, <br> então obrigatoriamente levarei 7 dias viajando no tempo para o <br> dia depois de amanhã';
-				resposta = false;
+				perg.innerHTML = '<img src="img2.png">';
+				resposta = true;
 			}
 
 			if (perguntaAtual == 6) {
+				perg.innerHTML = '<img src="img3.png">';
+				resposta = false;
+			}
+
+			if (perguntaAtual == 7) {
 				perg.innerHTML = 'Em todo momento no futuro é verdade que <br> em algum momento do passado você leu isso';
 				resposta = true;
 			}
 
-			if (perguntaAtual == 7) {
-				perg.innerHTML = 'Toda vez que eu viajava pela Estrada de Ouro Fino,<br> então de longe eu avistava a figura de um menino.<br> Para todo instante no futuro em que eu viajar pela Estrada de Ouro Fino,<br> vou avistar a figura de um menino';
-				resposta = false;
-			}
+			
 
-			if (perguntaAtual == 8) {
-				perg.innerHTML = 'Toda vez que eu viajava pela Estrada de Ouro Fino,<br> então de longe eu avistava a figura de um menino.<br> Para todo instante no futuro em que eu viajar pela Estrada de Ouro Fino,<br> vou avistar a figura de um menino';
-				resposta = false;
-			}
-
-			if(perguntaAtual > 8){
+			if(perguntaAtual > 7){
 				document.getElementById('botoes').style.display = 'none';
 				perg.innerHTML = 'Você conseguiu '+pontuacao+ ' pontos';
 			}
+
 
 
 			perguntaAtual++;
