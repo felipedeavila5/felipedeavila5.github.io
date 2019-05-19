@@ -161,36 +161,42 @@
 				perg.innerHTML = 'Se OPAT é uma matéria obrigatória, <br> então não é permitido não cursar opat?';
 				resposta = true;
 			}
+			
 			if (perguntaAtual == 2) {
-				perg.innerHTML = 'Se é necessário que se penso, logo existo,<br> então não é possível pensar e não existir';
-				resposta = true;
-			}
-			if (perguntaAtual == 3) {
 				perg.innerHTML = 'É obrigatório proibir, então não é possível não proibir';
 				resposta = true;
 			}
-			if (perguntaAtual == 4) {
+			if (perguntaAtual == 3) {
 				perg.innerHTML = 'A seguinte afirmação está correta?<br><img width=200px; src="img.png">';
 				resposta = false;
 			}
-			if (perguntaAtual == 5) {
+			if (perguntaAtual == 4) {
 				perg.innerHTML = '<img src="img2.png">';
 				resposta = true;
 			}
 
-			if (perguntaAtual == 6) {
+			if (perguntaAtual == 5) {
 				perg.innerHTML = '<img src="img3.png">';
 				resposta = false;
 			}
 
-			if (perguntaAtual == 7) {
-				perg.innerHTML = 'Em todo momento no futuro é verdade que <br> em algum momento do passado você leu isso';
-				resposta = true;
+			if (perguntaAtual == 6) {
+				perg.innerHTML = '<img src="img4.png">';
+				resposta = false;
 			}
 
+			if (perguntaAtual == 7) {
+				perg.innerHTML = '<img src="img5.png">';
+				resposta = false;
+			}
+			if (perguntaAtual == 8) {
+				perg.innerHTML = '<img src="img6.png">';
+				resposta = true;
+			}
+			
 			
 
-			if(perguntaAtual > 7){
+			if(perguntaAtual > 8){
 				document.getElementById('botoes').style.display = 'none';
 				perg.innerHTML = 'Você conseguiu '+pontuacao+ ' pontos';
 			}
