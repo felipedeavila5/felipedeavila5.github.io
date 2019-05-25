@@ -1661,7 +1661,7 @@ function resp_disp(valores){
 function mostra_escolha(){
 	var coluna = document.getElementById("cl_esq");
 	var soma = questaoAtual+2;
-	alert(questaoAtual);
+	
 	coluna.innerHTML += '<div class="formula">'+soma+'. <img src="img/questoes/questao1/resp'+questaoAtual+'.png"></div>' 
 }
 
