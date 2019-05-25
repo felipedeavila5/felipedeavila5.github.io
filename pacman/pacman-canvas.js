@@ -249,8 +249,10 @@ function geronimo() {
 			};
 
 		this.newGame = function() {
-		    var r = confirm("Are you sure you want to restart?");
+		    var r = confirm("Começar um novo Jogo?");
             if (r) {
+            	questaoAtual = 1;
+            	pontos = 0;
         	    console.log("new Game");
                 this.init(0);
                 this.pauseResume();
@@ -260,7 +262,7 @@ function geronimo() {
 		this.nextLevel = function() {
 			this.level++;
             console.log("Level "+game.level);
-			game.showMessage("Level "+game.level, this.getLevelTitle() + "<br/>(Click to continue!)");
+			game.showMessage("Level "+game.level, this.getLevelTitle() + "<br/>(Clique para Continuar!)");
 			game.refreshLevel(".level");
 			this.init(1);
 		};
@@ -282,29 +284,41 @@ function geronimo() {
 		this.getLevelTitle = function() {
 			switch(this.level) {
 				case 2:
-					return '"The chase begins"';
+					return '"Só começando"';
                     // activate chase / scatter switching
 				case 3:
-					return '"Inky\s awakening"';
+					return '"Isso aí!"';
                     // Inky starts leaving the ghost house
 				case 4:
-					return '"Clyde\s awakening"';
+					return '"Possivelmente fácil"';
                     // Clyde starts leaving the ghost house
 				case 5:
-					return '"need for speed"';
+					return '"Você consegue"';
                     // All the ghosts get faster from now on
                 case 6:
-                    return '"hunting season 1"';
+                    return '"Sobrevivendo"';
                     // TODO: No scatter mood this time
                 case 7:
-                    return '"the big calm"';
+                    return '"Se chegou até aqui, chega até ali"';
                     // TODO: Only scatter mood this time
                 case 8:
-                    return '"hunting season 2"';
+                    return '"Falta pouco. (A metade)"';
                     // TODO: No scatter mood and all ghosts leave instantly
                 case 9:
-                    return '"ghosts on speed"';
+                    return '"Aqui é brain builder!!"';
                     // TODO: Ghosts get even faster for this level
+                case 10:
+                    return '"Aproveita, o fantasma cansou"';
+                case 11:
+                    return '"Vou ser sincero, tá longe"';
+                case 12:
+                    return '"Nunca ninguém chegou até aqui"';
+                case 13:
+                    return '"Bem-vindo ao Everest"';
+                case 14:
+                    return '"Já posso ver a luz"';
+                case 15:
+                    return '"Eis á luz"';
 				default:
 					return '"nothing new"';
 			}
@@ -1014,14 +1028,20 @@ function geronimo() {
 						)
 						{	var s;
 							if (field === "powerpill") {
-
-								//alert(this.posX +" "+this.posY);
+								
                                 if(verifica_questao(get_pos_value(this.posX, this.posY))){
+                                    mostra_escolha();
                                     game.score.add(100);
                                     game.acertou = true;
+                                    questaoAtual++;
+                                    correta = ale_correta();
+                                    add_questao(questaoAtual);
+                                    
+                                    //game.nextLevel();
 
                                 }else{
-                                    game.nextLevel();
+                                	correta = ale_correta();
+                                	add_questao(questaoAtual);
                                     pacman.die();
                                 }
 								Sound.play("powerpill");
@@ -1035,7 +1055,7 @@ function geronimo() {
 								s = 10;
 								game.pillCount--;
 								}
-							game.map.posY[gridY].posX[gridX].type = "null";
+							//game.map.posY[gridY].posX[gridX].type = "null";
 							//game.score.add(s);
 						}
 				}
@@ -1196,12 +1216,15 @@ function geronimo() {
 			blinky.reset();
 			clyde.reset();
     		this.lives--;
+    		
+    		pontos = 0;
 	        console.log("pacman died, "+this.lives+" lives left");
 	    	if (this.lives <= 0) {
+	    		questaoAtual = 1;
 				var input = "<div id='highscore-form'><span id='form-validater'></span><input type='text' id='playerName'/><span class='button' id='score-submit'>save</span></div>";
-				game.showMessage("Game over","Pontuação: "+game.score.score+input);
+				game.showMessage("Game over","Pontuação: "+game.score.score);
 				game.gameOver = true;
-				$('#playerName').focus();
+				
 				}
 			game.drawHearts(this.lives);
 		}
@@ -1293,15 +1316,7 @@ function checkAppCache() {
 			if (!(game.gameOver == true))	game.pauseResume();
 		});
 
-		$('body').on('click', '#score-submit', function(){
-			console.log("submit highscore pressed");
-			if ($('#playerName').val() === "" || $('#playerName').val() === undefined) {
-				$('#form-validater').html("Please enter a name<br/>");
-			} else {
-				$('#form-validater').html("");
-				addHighscore();
-			}
-		});
+		
 
 		$('body').on('click', '#show-highscore', function(){
 			game.showContent('highscore-content');
@@ -1583,22 +1598,12 @@ function checkAppCache() {
 			case 68:	// D pressed
 				pacman.directionWatcher.set(right);
 				break;
-			case 78:	// N pressed
-			if (!$('#playerName').is(':focus')) {
-				game.pause = 1;
-				game.newGame();
-				}
-				break;
+			
 			case 77:	// M pressed
 				game.toggleSound();
 				break;
 			case 8:		// Backspace pressed -> show Game Content
-			case 27:	// ESC pressed -> show Game Content
-				if (!$('#playerName').is(':focus')) {
-					evt.preventDefault();
-					game.showContent('game-content');
-					}
-				break;
+			
 			case 32:	// SPACE pressed -> pause Game
                 evt.preventDefault();
 				if (!(game.gameOver == true)
@@ -1609,37 +1614,100 @@ function checkAppCache() {
 		}
 }
 
+function ale_correta(){
+	return Math.floor((Math.random() * 4) + 1);
+}
+
 var questaoAtual = 1;
 var pontos = 0;
+var correta = ale_correta();
+
+
 
 function verifica_questao(resposta) {
-    var correta;
-    if(resposta == 1){
-        correta = 1;
         if(correta == resposta){
             pontos = pontos+100;
             return true;
         }else{
             return false;
         }
-    }
+    
 }
 
-function muda_questao() {
+function numero_cor(num){
+	if(num == 1){
+		return "amarelo";
+	}
+	if(num == 2){
+		return "rosa";
+	}
+	if(num == 3){
+		return "verde";
+	}
+	if(num == 4){
+		return "vermelho";
+	}
+}
+
+function valores_disp(valores){
+	
+	return numero_cor(valores.pop());
+}
+
+function resp_disp(valores){
+	return valores.pop();
+}
+
+function mostra_escolha(){
+	var coluna = document.getElementById("cl_esq");
+	var soma = questaoAtual+2;
+	alert(questaoAtual);
+	coluna.innerHTML += '<div class="formula">'+soma+'. <img src="img/questoes/questao1/resp'+questaoAtual+'.png"></div>' 
+}
+
+
+function add_questao(num){
+	var valores = [1,2,3,4];
+	valores.splice( valores.indexOf(correta), 1 );
+	var hipotese;
+	var elementoCorreto = document.getElementById(numero_cor(correta));
+	var errada1 = document.getElementById(valores_disp(valores));
+	var errada2 = document.getElementById(valores_disp(valores));
+	var errada3 = document.getElementById(valores_disp(valores));
+	elementoCorreto.innerHTML = '<img src="img/questoes/questao1/resp'+num+'.png">'
+	valores = [1,2,3,4,5,6,8,9,11]
+	valores.splice( valores.indexOf(questaoAtual), 1 );
+	errada1.innerHTML = '<img src="img/questoes/questao1/resp'+resp_disp(valores)+'.png">'
+	errada2.innerHTML = '<img src="img/questoes/questao1/resp'+resp_disp(valores)+'.png">'
+	errada3.innerHTML = '<img src="img/questoes/questao1/resp'+resp_disp(valores)+'.png">'
+
 
 }
+
+add_questao(questaoAtual);
+
+
 
 function get_pos_value(x,y) {
     if(x == 30 && y == 35){
         return 1; //amarelo
     }
+    if(x == 35 && y == 30){
+        return 1; //amarelo
+    }
     if(x == 30 && y == 330){
+        return 2; //rosa
+    }
+    if(x == 35 && y == 330){
         return 2; //rosa
     }
     if(x == 480 && y == 330){
         return 3; //verde
     }
     if(x == 480 && y == 35){
+        return 4; //vermelho
+    }
+    if(x == 480 && y == 30){
         return 4; //vermelho
     }
 }
