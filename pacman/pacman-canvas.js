@@ -253,6 +253,8 @@ function geronimo() {
             if (r) {
             	questaoAtual = 1;
             	pontos = 0;
+            	reset_mostra_escolha();
+            	add_questao(questaoAtual);
         	    console.log("new Game");
                 this.init(0);
                 this.pauseResume();
@@ -1661,8 +1663,12 @@ function resp_disp(valores){
 function mostra_escolha(){
 	var coluna = document.getElementById("cl_esq");
 	var soma = questaoAtual+2;
-	
 	coluna.innerHTML += '<div class="formula">'+soma+'. <img src="img/questoes/questao1/resp'+questaoAtual+'.png"></div>' 
+}
+
+function reset_mostra_escolha(){
+	var coluna = document.getElementById("cl_esq");
+	coluna.innerHTML = '<div class="formula">Fórmula: <img src="img/questoes/questao1/formula.png"></div><div class="formula">1. Suposição: <img src="img/questoes/questao1/hipotese1.png"></div><div class="formula">2. Suposição: <img src="img/questoes/questao1/hipotese2.png"></div>';
 }
 
 
