@@ -437,6 +437,10 @@ function geronimo() {
 		if (this.acertou && game.running) {
 				this.nextLevel();
                 this.acertou = false;
+                if(this.level == 14){
+                    this.showMessage("Parabéns","Pontuação: "+game.score.score);
+					this.gameOver = true;
+                                    }
 			}
 		};
 
@@ -1036,6 +1040,7 @@ function geronimo() {
                                     game.score.add(100);
                                     game.acertou = true;
                                     questaoAtual++;
+                                    
                                     correta = ale_correta();
                                     add_questao(questaoAtual);
                                     
