@@ -1034,16 +1034,16 @@ function geronimo() {
 						)
 						{	var s;
 							if (field === "powerpill") {
-								
+
                                 if(verifica_questao(get_pos_value(this.posX, this.posY))){
                                     mostra_escolha();
                                     game.score.add(100);
                                     game.acertou = true;
                                     questaoAtual++;
-                                    
+
                                     correta = ale_correta();
                                     add_questao(questaoAtual);
-                                    
+
                                     //game.nextLevel();
 
                                 }else{
@@ -1223,7 +1223,7 @@ function geronimo() {
 			blinky.reset();
 			clyde.reset();
     		this.lives--;
-    		
+
     		pontos = 0;
 	        console.log("pacman died, "+this.lives+" lives left");
 	    	if (this.lives <= 0) {
@@ -1231,7 +1231,7 @@ function geronimo() {
 				var input = "<div id='highscore-form'><span id='form-validater'></span><input type='text' id='playerName'/><span class='button' id='score-submit'>save</span></div>";
 				game.showMessage("Game over","Pontuação: "+game.score.score);
 				game.gameOver = true;
-				
+
 				}
 			game.drawHearts(this.lives);
 		}
@@ -1323,7 +1323,7 @@ function checkAppCache() {
 			if (!(game.gameOver == true))	game.pauseResume();
 		});
 
-		
+
 
 		$('body').on('click', '#show-highscore', function(){
 			game.showContent('highscore-content');
@@ -1605,12 +1605,12 @@ function checkAppCache() {
 			case 68:	// D pressed
 				pacman.directionWatcher.set(right);
 				break;
-			
+
 			case 77:	// M pressed
 				game.toggleSound();
 				break;
 			case 8:		// Backspace pressed -> show Game Content
-			
+
 			case 32:	// SPACE pressed -> pause Game
                 evt.preventDefault();
 				if (!(game.gameOver == true)
@@ -1638,7 +1638,7 @@ function verifica_questao(resposta) {
         }else{
             return false;
         }
-    
+
 }
 
 function numero_cor(num){
@@ -1657,7 +1657,7 @@ function numero_cor(num){
 }
 
 function valores_disp(valores){
-	
+
 	return numero_cor(valores.pop());
 }
 
@@ -1668,13 +1668,34 @@ function resp_disp(valores){
 function mostra_escolha(){
 	var coluna = document.getElementById("cl_esq");
 	var soma = questaoAtual+2;
-	coluna.innerHTML += '<div class="formula">'+soma+'. <img src="img/questoes/questao1/resp'+questaoAtual+'.png"></div>' 
+	coluna.innerHTML += '<div class="formula">'+soma+'. <img src="img/questoes/questao1/resp'+questaoAtual+'.png"></div>'
 }
 
 function reset_mostra_escolha(){
 	var coluna = document.getElementById("cl_esq");
 	coluna.innerHTML = '<div class="formula">Fórmula: <img src="img/questoes/questao1/formula.png"></div><div class="formula">1. Suposição: <img src="img/questoes/questao1/hipotese1.png"></div><div class="formula">2. Suposição: <img src="img/questoes/questao1/hipotese2.png"></div>';
 }
+
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 
 
 function add_questao(num){
@@ -1686,11 +1707,12 @@ function add_questao(num){
 	var errada2 = document.getElementById(valores_disp(valores));
 	var errada3 = document.getElementById(valores_disp(valores));
 	elementoCorreto.innerHTML = '<img src="img/questoes/questao1/resp'+num+'.png">'
-	valores = [1,2,3,4,5,6,8,9,11]
+	valores = [1,2,3,4,5,6,7,8];
+	valores = shuffle(valores);
 	valores.splice( valores.indexOf(questaoAtual), 1 );
-	errada1.innerHTML = '<img src="img/questoes/questao1/resp'+resp_disp(valores)+'.png">'
-	errada2.innerHTML = '<img src="img/questoes/questao1/resp'+resp_disp(valores)+'.png">'
-	errada3.innerHTML = '<img src="img/questoes/questao1/resp'+resp_disp(valores)+'.png">'
+	errada1.innerHTML = '<img src="img/questoes/questao1/erradas/errada'+resp_disp(valores)+'.png">'
+	errada2.innerHTML = '<img src="img/questoes/questao1/erradas/errada'+resp_disp(valores)+'.png">'
+	errada3.innerHTML = '<img src="img/questoes/questao1/erradas/errada'+resp_disp(valores)+'.png">'
 
 
 }
