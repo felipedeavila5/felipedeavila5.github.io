@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body{
+        background: #1488CC;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, #2B32B2, #1488CC);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #2B32B2, #1488CC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+
+      .questao{
+           width: 700px;
+           height: 200px;
+           background-image: linear-gradient(to right top, #a0000d, #b40b10, #c81614, #dc2017, #f1291a);
+           border-radius: 50px;
+           border: 10px solid white;
+      }
+
+      .conteudo_questao{
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+    }
+
+
+      .alternativa{
+           width: 700px;
+           height: 90px;
+           background-image: linear-gradient(to right top, #a0000d, #b40b10, #c81614, #dc2017, #f1291a);
+           border-radius: 50px;
+           border: 10px solid white;
+           cursor: pointer;
+
+      }
+      .alternativa:hover{
+        opacity: 0.5;
+      }
+      #alt1{
+        margin-top: 20px;
+      }
+      #alt2{
+        margin-top: 20px;
+      }
+      #alt3{
+        margin-top: 20px;
+      }
+      #alt4{
+        margin-top: 20px;
+      }
+      #show{
+        width: 400px;
+        position: absolute;
+        margin-left: 50%;
+        margin-top: 9%;
+      }
+
+
+      .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+
+      }
+      .blocos{
+        margin-top: 20px;
+        width: 700;
+        display: flex;
+        margin-left: 20px;
+      }
+      .bloco{
+        width: 100px;
+        height: 60px;
+        background-color: #fefa01;
+        border-style: groove;
+        border-width: 7px;
+        border-color: #fc7b00;
+        margin-left: 20px;
+      }
+
+      .bloco p{
+        color: red;
+        font-size: 1.5rem;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        vertical-align: middle;
+        margin-top: 10%;
+      }
+      #botao_universitario{
+        background-color: green;
+      }
+
+      .descricao_premio{
+        width: 700;
+        display: flex;
+        margin-left: 20px;
+      }
+      .descri{
+        color: white;
+        width: 100px;
+        height: 60px;
+        margin-left: 30px;
+      }
+      .descri p{
+        color: white;
+        font-size: 2.0rem;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        vertical-align: middle;
+      }
+
+      #img_univer{
+        width: 100%;
+        margin-top: -15px;
+        cursor: pointer;
+      }
+
+
+
+    </style>
+    <script src="sweetalert2.all.min.js"></script>
+  </head>
+  <body>
+    <img  id="show" class="center" src="show.png" alt="">
+    <div class="questao">
+      <div class="center" style="margin-top:10%">
+            Questão 1
+      </div>
+    </div>
+    <div class="alternativa" id="alt1">
+        <div class="center" style="margin-top:2%">
+            Alternativa 1
+        </div>
+    </div>
+    <div class="alternativa" id="alt2">
+        <div class="center" style="margin-top:2%">
+            Alternativa 2
+        </div>
+    </div>
+    <div class="alternativa" id="alt3">
+        <div class="center" style="margin-top:2%">
+            Alternativa 3
+        </div>
+    </div>
+    <div class="alternativa" id="alt4">
+        <div class="center" style="margin-top:2%">
+            Alternativa 4
+        </div>
+    </div>
+    <div class="blocos">
+      <div class="bloco">
+        <p>25 MIL</p>
+      </div>
+
+      <div class="bloco" style="cursor:pointer">
+        <p>50 MIL</p>
+      </div>
+
+      <div class="bloco">
+        <p>100 MIL</p>
+      </div>
+
+      <div class="bloco" onclick="chama_univ()" id="botao_universitario">
+      <img src="univer.png" id="img_univer" alt="">
+      </div>
+
+    </div>
+
+    <div class="descricao_premio">
+      <div class="descri">
+        <p>Errar</p>
+      </div>
+      <div class="descri">
+        <p>Parar</p>
+      </div>
+      <div class="descri">
+        <p>Acertar</p>
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    function chama_univ() {
+            Swal.fire({
+        title: 'Pedir ajuda aos Universitários?',
+        text: "Um membro da equipe será sorteado para dar auxilio",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, chame alguém!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Sorteado!',
+            'Chame o '+aleatorio()+' para ajudar',
+            'success'
+          )
+        }
+      })
+    }
+    var universitarios = ['Ariel', 'Felipe', 'Felipe', 'André', 'André', 'André', 'Rafael', 'Rafael', 'Rafael', 'Rafael']
+
+    function aleatorio() {
+        var aleatorio = Math.floor((Math.random() * 9) + 0);
+        return universitarios[aleatorio];
+    }
+
+
+  </script>
+</html>
