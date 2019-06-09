@@ -165,7 +165,7 @@
       .passos img{
         
         height: 30px;
-        
+        z-index: 1;
 
       }
 
@@ -205,12 +205,100 @@
 
       }
 
+      .verde{
+        background: #11998e;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+      }
+      .vermelho{
+         background-image: linear-gradient(to right top, #a0000d, #b40b10, #c81614, #dc2017, #f1291a);
+      }
+
+      .snowflake {
+  color: #fff;
+  font-size: 1em;
+  font-family: Arial;
+  text-shadow: 0 0 1px #000;
+}
+
+@-webkit-keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@-webkit-keyframes snowflakes-shake{0%{-webkit-transform:translateX(0px);transform:translateX(0px)}50%{-webkit-transform:translateX(80px);transform:translateX(80px)}100%{-webkit-transform:translateX(0px);transform:translateX(0px)}}@keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@keyframes snowflakes-shake{0%{transform:translateX(0px)}50%{transform:translateX(80px)}100%{transform:translateX(0px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;-webkit-animation-name:snowflakes-fall,snowflakes-shake;-webkit-animation-duration:10s,3s;-webkit-animation-timing-function:linear,ease-in-out;-webkit-animation-iteration-count:infinite,infinite;-webkit-animation-play-state:running,running;animation-name:snowflakes-fall,snowflakes-shake;animation-duration:10s,3s;animation-timing-function:linear,ease-in-out;animation-iteration-count:infinite,infinite;animation-play-state:running,running}.snowflake:nth-of-type(0){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}.snowflake:nth-of-type(1){left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s}.snowflake:nth-of-type(2){left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s}.snowflake:nth-of-type(3){left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s}.snowflake:nth-of-type(4){left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s}.snowflake:nth-of-type(5){left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s}.snowflake:nth-of-type(6){left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s}.snowflake:nth-of-type(7){left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s}.snowflake:nth-of-type(8){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}.snowflake:nth-of-type(9){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}
+/* Demo Purpose Only*/
+.demo {
+  font-family: 'Raleway', sans-serif;
+  color:#fff;
+    display: block;
+    margin: 0 auto;
+    padding: 15px 0;
+    text-align: center;
+}
+.demo a{
+  font-family: 'Raleway', sans-serif;
+color: #000;    
+}
 
     </style>
     <script src="sweetalert2.all.min.js"></script>
   </head>
   <body>
+    <div class="snowflakes" id="dinheiro" style="display: unset;" aria-hidden="true">
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+      <div class="snowflake">
+      <img src="money.png" width="35px;">
+      </div>
+    </div>
+
+
+
+
+
     <div class="passos">
       <div class="passo" id="passo1">
         <p>H: </p>
@@ -275,7 +363,23 @@
       
     </div>
     <img  id="show" class="center" src="show.png" alt="">
+    
+     <audio id="musica">
+        <source id="ssd" src="showdomodal.mp3" preload="metadata" type="audio/mpeg">
+    </audio>
 
+    <audio id="pergunta_audio">
+        <source  src="pergunta.mp3" preload="metadata" type="audio/mpeg">
+    </audio>
+
+    <audio id="suspense">
+        <source  src="suspense.mp3" preload="metadata" type="audio/mpeg">
+    </audio>
+
+     <audio id="certa_resposta">
+        <source  src="certa_resposta.mp3" preload="metadata" type="audio/mpeg">
+    </audio>
+    
     <div class="questao" id="id_questao">
       <div class="center" style="margin-top:10%">
             <img src="regras/regra4.png">
@@ -360,30 +464,67 @@
   };
 
   var premiacao = {
-    'perg1':{'errar':0, 'parar':0, 'acertar':1},
-    'perg2':{'errar':0, 'parar':1, 'acertar':2},
-    'perg3':{'errar':1, 'parar':2, 'acertar':3},
-    'perg4':{'errar':2, 'parar':3, 'acertar':4},
-    'perg5':{'errar':3, 'parar':4, 'acertar':5},
-    'perg6':{'errar':4, 'parar':5, 'acertar':10},
-    'perg7':{'errar':5, 'parar':10, 'acertar':20},
-    'perg8':{'errar':10, 'parar':20, 'acertar':30},
-    'perg9':{'errar':20, 'parar':30, 'acertar':40},
-    'perg10':{'errar':30, 'parar':40, 'acertar':50},
-    'perg11':{'errar':40, 'parar':50, 'acertar':100},
-    'perg12':{'errar':50, 'parar':100, 'acertar':200},
-    'perg13':{'errar':100, 'parar':200, 'acertar':300},
-    'perg14':{'errar':200, 'parar':300, 'acertar':400},
-    'perg15':{'errar':300, 'parar':400, 'acertar':500},
-    'perg16':{'errar':0, 'parar':500, 'acertar':1000}
-  }
+    
+    'perg1':{'errar':0, 'parar':0, 'acertar':4},
+    'perg2':{'errar':0, 'parar':4, 'acertar':5},
+    'perg3':{'errar':4, 'parar':5, 'acertar':10},
+    'perg4':{'errar':5, 'parar':10, 'acertar':20},
+    'perg5':{'errar':10, 'parar':20, 'acertar':30},
+    'perg6':{'errar':20, 'parar':30, 'acertar':40},
+    'perg7':{'errar':30, 'parar':40, 'acertar':50},
+    'perg8':{'errar':40, 'parar':50, 'acertar':100},
+    'perg9':{'errar':50, 'parar':100, 'acertar':200},
+    'perg10':{'errar':100, 'parar':200, 'acertar':300},
+    'perg11':{'errar':200, 'parar':300, 'acertar':400},
+    'perg12':{'errar':300, 'parar':400, 'acertar':500},
+    'perg13':{'errar':0, 'parar':500, 'acertar':1000}
+  };
 
 
 
-
+  mensagem_boas_vindas();
   add_botao_comecar();
   esconder_blocos();
+  
+ 
+    var musica = document.getElementById("musica");
+    var pergunta_audio = document.getElementById("pergunta_audio");
+    var suspense = document.getElementById("suspense");
+    var certa_resposta = document.getElementById("certa_resposta");
 
+    function playMusica(){ 
+       
+      musica.play(); 
+    } 
+
+    function pauseMusica(){
+      musica.pause(); 
+    }
+    
+    function playPergunta(){ 
+       
+      pergunta_audio.play(); 
+    }
+
+    function playSuspense(){ 
+       setTimeout(function(){
+            suspense.play(); 
+            
+        }, 3000);
+      
+    } 
+
+    function pauseSuspense(){ 
+      suspense.pause(); 
+    }
+
+    function playCerta_Resposta(){ 
+            suspense.pause();
+            certa_resposta.play(); 
+            
+       
+      
+    } 
 
   function mostrar_alternativas(){
     var id_alternativas = ['alt1', 'alt2', 'alt3', 'alt4']
@@ -531,10 +672,13 @@
       passo.style.display = "flex";
     }
 
-
+    var posicao_correta;
     function proxima_questao(){
-      var regras = ['1', '2', '3', '4'];
+      var regras = ['1', '2', '3', '4', '5', '6'];
       var id_alternativas = ['alt1', 'alt2', 'alt3', 'alt4'];
+      
+
+      esconder_chuva();
       esconder_blocos();
       esconder_alternativas();
       add_questao();
@@ -542,7 +686,7 @@
       mostra_passo();
 
       var regra;
-      var posicao_correta = Math.floor((Math.random() * 3) + 0);
+      posicao_correta = Math.floor((Math.random() * 3) + 0);
       var correta = perguntas['perg'+questao_atual];
       regras.splice(perguntas['perg'+questao_atual]-1, 1);
       regras = shuffle(regras);
@@ -557,12 +701,17 @@
         }
         
       }
-      
+      pauseMusica();
+      pauseSuspense();
+
+      playPergunta();
+      reset_cor_alt();
       mostrar_alternativas();
       errar();
       parar();
       acertar();
       mostrar_blocos();
+      playSuspense();
 
 
     }
@@ -586,13 +735,25 @@
     return array;
     }
 
-
+    var fimdojogo = false;
     function verifica(regra){
+      if(fimdojogo){
+        return;
+      }
       if(perguntas['perg'+questao_atual] == regra){
-        alert("acertou");
-        proxima_questao();
+        muda_cor_alt(posicao_correta+1);
+        acertou();
+        playCerta_Resposta();
+        if(questao_atual <= 12){
+          setTimeout(function(){
+            proxima_questao();
+            
+        }, 1500);
+          
+        }
+        
       }else{
-        alert("errou")
+        errou();
       }
 
     }
@@ -661,7 +822,75 @@
       acertar.innerHTML = html;
     }
 
+    function errou() {
+              Swal.fire({
+          type: 'error',
+          title: 'Você Errou!',
+          text: 'Sua pontuação foi '+premiacao['perg'+questao_atual].errar,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Novo jogo!'
+        }).then((result) => {
+            fimdojogo = true;
+            if (result.value) {
+              location.reload();
+            }
+          })
+    }
+
+    function acertou() {
+      if (questao_atual == 13) {
+                Swal.fire({
+          type: 'success',
+          title: 'Parabéns',
+          text: 'Você atingiu a pontuação máxima. Agora você é um modalnário'
+        });
+        mostrar_chuva();
+        esconder_alternativas();
+        esconder_blocos();
+        pauseSuspense();
+        playMusica();
+      }
+    }
+
+    function mensagem_boas_vindas() {
+              Swal.fire({
+          title: 'Bem-vindos ao Show do Modal!',
+          text: 'A cada passo apresentado na tela você deve selecionar a regra do tableaux que foi utilizado no passo',
+          imageUrl: 'show.png',
+          imageWidth: 150,
+          imageHeight: 200,
+          imageAlt: 'Show do Modal',
+          animation: false
+        }).then((result) => {
+              playMusica();
+            })
+    }
+
+    function muda_cor_alt(id) {
+      var element = document.getElementById('alt'+id);
+      element.classList.add("verde");
+      
+    }
+
+    function reset_cor_alt(){
+      var element = document.getElementById('alt1');
+      element.classList.remove("verde");
+      element = document.getElementById('alt2');
+      element.classList.remove("verde");
+      element = document.getElementById('alt3');
+      element.classList.remove("verde");
+      element = document.getElementById('alt4');
+      element.classList.remove("verde");
+    }
     
+    function mostrar_chuva(){
+      document.getElementById('dinheiro').style.display = "unset";
+    }
+    function esconder_chuva(){
+      document.getElementById('dinheiro').style.display = "none";
+    }
    
 
   </script>
