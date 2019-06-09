@@ -18,6 +18,10 @@
            border-radius: 50px;
            border: 10px solid white;
       }
+      .questao img{
+        margin-top: -9%;
+        max-height: 140px;
+      }
 
       .conteudo_questao{
           margin-left: auto;
@@ -27,42 +31,66 @@
 
 
       .alternativa{
+          
            width: 700px;
            height: 90px;
            background-image: linear-gradient(to right top, #a0000d, #b40b10, #c81614, #dc2017, #f1291a);
            border-radius: 50px;
            border: 10px solid white;
            cursor: pointer;
+           -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+            -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+            animation-name: example;
+            animation-duration: 1s;
+
 
       }
+
+
+      /* Standard syntax */
+        @keyframes example {
+          0%   {margin-left:-700px; }
+          100% {margin-left: 0px;}
+        }
+
       .alternativa:hover{
         opacity: 0.5;
       }
       #alt1{
         margin-top: 20px;
+        display: none;
       }
       #alt2{
         margin-top: 20px;
+        
+        display: none;
       }
       #alt3{
         margin-top: 20px;
+        
+        display: none;
       }
       #alt4{
         margin-top: 20px;
+        
+        display: none;
       }
       #show{
         width: 400px;
         position: absolute;
         margin-left: 50%;
         margin-top: 9%;
+
       }
+
+      
 
 
       .center{
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 50%;
+        width: 100%;
         text-align: center;
         color: white;
         font-size: 2rem;
@@ -121,48 +149,85 @@
         cursor: pointer;
       }
 
+      a{
+        text-decoration: none;
+        color: white;
+      }
+
+      @media only screen and (max-width: 1500px) {
+          .questao{
+           width: 500px;
+           height: 150px;
+           border: 8px solid white;
+          }
+
+           .alternativa{
+           width: 500px;
+           height: 50px;
+           border: 8px solid white;
+
+          }
+
+                #show{
+                  width: 200px;
+                  position: absolute;
+                  margin-left: 55%;
+                  margin-top: 12%;
+                }
+
+      }
+
 
 
     </style>
     <script src="sweetalert2.all.min.js"></script>
   </head>
   <body>
+    <div class="passos">
+      
+    </div>
     <img  id="show" class="center" src="show.png" alt="">
-    <div class="questao">
+
+    <div class="questao" id="id_questao">
       <div class="center" style="margin-top:10%">
-            Questão 1
+            <img src="regras/regra4.png">
+            
       </div>
     </div>
-    <div class="alternativa" id="alt1">
-        <div class="center" style="margin-top:2%">
-            Alternativa 1
-        </div>
+    <div id="todas_alternativas">
+        <div class="alternativa" id="alt1">
+          <div class="center" style="margin-top:2%">
+              Alternativa 1
+          </div>
+       </div>
+      <div class="alternativa" id="alt2">
+          <div class="center" style="margin-top:2%">
+              Alternativa 2
+          </div>
+      </div>
+      <div class="alternativa" id="alt3">
+          <div class="center" style="margin-top:2%">
+              Alternativa 3
+          </div>
+      </div>
+      <div class="alternativa" id="alt4">
+          <div class="center" style="margin-top:2%">
+              Alternativa 4
+          </div>
+      </div>
+
     </div>
-    <div class="alternativa" id="alt2">
-        <div class="center" style="margin-top:2%">
-            Alternativa 2
-        </div>
-    </div>
-    <div class="alternativa" id="alt3">
-        <div class="center" style="margin-top:2%">
-            Alternativa 3
-        </div>
-    </div>
-    <div class="alternativa" id="alt4">
-        <div class="center" style="margin-top:2%">
-            Alternativa 4
-        </div>
-    </div>
-    <div class="blocos">
-      <div class="bloco">
+    
+    <div id="id_blocos" class="blocos">
+      <div id="errar" class="bloco">
         <p>25 MIL</p>
       </div>
 
-      <div class="bloco" style="cursor:pointer">
+      <div class="bloco" id="parar" style="cursor:pointer">
         <p>50 MIL</p>
       </div>
 
-      <div class="bloco">
+      <div class="bloco" id="acertar">
         <p>100 MIL</p>
       </div>
 
@@ -172,20 +237,119 @@
 
     </div>
 
-    <div class="descricao_premio">
-      <div class="descri">
+    <div class="descricao_premio" id="id_descricao_premio">
+      <div class="descri" id="errar_desc">
         <p>Errar</p>
       </div>
-      <div class="descri">
+      <div class="descri" id="parar_desc">
         <p>Parar</p>
       </div>
-      <div class="descri">
+      <div class="descri" id="acertar_desc">
         <p>Acertar</p>
       </div>
     </div>
-
+    
   </body>
   <script type="text/javascript">
+
+  var questao_atual = 0;
+  var perguntas = {
+    'perg1': '1',
+    'perg2': '2',
+    'perg3': '3',
+    'perg4': '4'
+
+  };
+
+  var premiacao = {
+    'perg1':{'errar':0, 'parar':0, 'acertar':1},
+    'perg2':{'errar':0, 'parar':1, 'acertar':2},
+    'perg3':{'errar':1, 'parar':2, 'acertar':3},
+    'perg4':{'errar':2, 'parar':3, 'acertar':4},
+    'perg5':{'errar':3, 'parar':4, 'acertar':5},
+    'perg6':{'errar':4, 'parar':5, 'acertar':10},
+    'perg7':{'errar':5, 'parar':10, 'acertar':20},
+    'perg8':{'errar':10, 'parar':20, 'acertar':30},
+    'perg9':{'errar':20, 'parar':30, 'acertar':40},
+    'perg10':{'errar':30, 'parar':40, 'acertar':50},
+    'perg11':{'errar':40, 'parar':50, 'acertar':100},
+    'perg12':{'errar':50, 'parar':100, 'acertar':200},
+    'perg13':{'errar':100, 'parar':200, 'acertar':300},
+    'perg14':{'errar':200, 'parar':300, 'acertar':400},
+    'perg15':{'errar':300, 'parar':400, 'acertar':500},
+    'perg16':{'errar':0, 'parar':500, 'acertar':1000}
+  }
+
+
+
+
+  add_botao_comecar();
+  esconder_blocos();
+
+
+  function mostrar_alternativas(){
+    var id_alternativas = ['alt1', 'alt2', 'alt3', 'alt4']
+    var id;
+   
+        
+            id = document.getElementById(id_alternativas[0]);
+            id.style.display = 'block';
+            
+        
+
+         setTimeout(function(){
+            id = document.getElementById(id_alternativas[1]);
+            id.style.display = 'block';
+            
+        }, 1000);
+
+          setTimeout(function(){
+            id = document.getElementById(id_alternativas[2]);
+            id.style.display = 'block';
+            
+        }, 2000);
+
+           setTimeout(function(){
+            id = document.getElementById(id_alternativas[3]);
+            id.style.display = 'block';
+            
+        }, 3000);
+      
+    
+    
+  }
+
+  function esconder_alternativas(){
+    var id_alternativas = ['alt1', 'alt2', 'alt3', 'alt4'];
+    var id;
+    for( i in id_alternativas){
+      id = document.getElementById(id_alternativas[i]);
+      id.style.display = "none";
+    }
+    esconder_blocos();
+  }
+
+  function esconder_blocos(){
+    var id_blocos = document.getElementById('id_blocos');
+    var id_descricao_premio = document.getElementById('id_descricao_premio');
+    id_blocos.style.display = 'none';
+    id_descricao_premio.style.display = 'none';
+  }
+
+
+  function mostrar_blocos(){
+    var id_blocos = document.getElementById('id_blocos');
+    var id_descricao_premio = document.getElementById('id_descricao_premio');
+    
+      setTimeout(function(){
+            id_blocos.style.display = 'flex';
+            id_descricao_premio.style.display = 'flex';
+            
+        }, 5000);
+  }
+
+
+
     function chama_univ() {
             Swal.fire({
         title: 'Pedir ajuda aos Universitários?',
@@ -213,6 +377,187 @@
         return universitarios[aleatorio];
     }
 
+    function add_botao_comecar(){
+      var id_questao = document.getElementById('id_questao');
+      
+      var html = '';
+
+      html += ' <div class="center" style="margin-top:10%">';
+      html += '     <a href="#" onclick="proxima_questao()">Começar</a>';
+      html += '</div>';
+      id_questao.innerHTML = html;
+    }
+
+
+    function add_questao(){
+      var id_questao = document.getElementById('id_questao');
+      
+      var html = '';
+
+      html += ' <div class="center" style="margin-top:10%">';
+      html += '     Qual a regra utilizada?';
+      html += '</div>';
+      id_questao.innerHTML = html;
+    }
+
+
+    function add_img_regra(regra){
+      var id_questao = document.getElementById('id_questao');
+      
+      var html = '';
+
+      html += ' <div class="center" style="margin-top:10%">';
+      html += '     <img src="regras/regra'+regra+'.png">';
+      html += '</div>';
+      id_questao.innerHTML = html;
+    }
+
+
+    function add_alternativa(id, regra){
+
+      var id_alternativa = document.getElementById(id);
+      document.getElementById(id).onmouseover = function() {add_img_regra(regra)};
+      document.getElementById(id).onmouseleave = function() {add_questao()};
+      var html = '';
+
+      html += ' <div class="center"  onclick="verifica('+regra+')" style="margin-top:2%">';
+      html += 'Regra '+regra;
+      html += '</div>';
+      id_alternativa.innerHTML = html;
+    
+    }
+
+
+    function proxima_questao(){
+      var regras = ['1', '2', '3', '4'];
+      var id_alternativas = ['alt1', 'alt2', 'alt3', 'alt4'];
+      esconder_blocos();
+      esconder_alternativas();
+      add_questao();
+      questao_atual++;
+
+      var regra;
+      var posicao_correta = Math.floor((Math.random() * 3) + 0);
+      var correta = perguntas['perg'+questao_atual];
+      regras.splice(perguntas['perg'+questao_atual]-1, 1);
+      regras = shuffle(regras);
+      for(var i = 0; i<4; i++){
+        if(i == posicao_correta){
+          add_alternativa(id_alternativas[i], correta);
+
+        }else{
+          regra = regras.pop();
+          console.log(regra);
+          add_alternativa(id_alternativas[i], regra);
+        }
+        
+      }
+      
+      mostrar_alternativas();
+      errar();
+      parar();
+      acertar();
+      mostrar_blocos();
+
+
+    }
+
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+
+    return array;
+    }
+
+
+    function verifica(regra){
+      if(perguntas['perg'+questao_atual] == regra){
+        alert("acertou");
+        proxima_questao();
+      }else{
+        alert("errou")
+      }
+
+    }
+
+    function errar(){
+      var errar = document.getElementById('errar');
+      var errar_desc = document.getElementById('errar_desc');
+      var html = '';
+      var valor = premiacao['perg'+questao_atual].errar;
+      if(valor == 0){
+        errar.style.display = "none";
+        errar_desc.style.display = "none";
+      }else{
+        errar.style.display = "unset";
+        errar_desc.style.display = "unset";
+      }
+      if(valor == 1000){
+        html += '<p>1 MILHÃO</p>';
+      }else{
+        html += '<p>'+valor+' MIL</p>';
+        
+      }
+      errar.innerHTML = html;
+    }
+
+
+    function parar(){
+      var parar = document.getElementById('parar');
+      var errar_desc = document.getElementById('parar_desc');
+      var html = '';
+      var valor = premiacao['perg'+questao_atual].parar;
+      if(valor == 0){
+        parar.style.display = "none";
+        parar_desc.style.display = "none";
+      }else{
+        parar.style.display = "unset";
+        parar_desc.style.display = "unset";
+      }
+      if(valor == 1000){
+        html += '<p>1 MILHÃO</p>';
+      }else{
+        html += '<p>'+valor+' MIL</p>';
+        
+      }
+      parar.innerHTML = html;
+    }
+
+    function acertar(){
+      var acertar = document.getElementById('acertar');
+      var acertar_desc = document.getElementById('acertar_desc');
+      var html = '';
+      var valor = premiacao['perg'+questao_atual].acertar;
+      if(valor == 0){
+        acertar.style.display = "none";
+        acertar_desc.style.display = "none";
+      }else{
+        acertar.style.display = "unset";
+        acertar_desc.style.display = "unset";
+      }
+      if(valor == 1000){
+        html += '<p>1 MILHÃO</p>';
+      }else{
+        html += '<p>'+valor+' MIL</p>';
+        
+      }
+      acertar.innerHTML = html;
+    }
+
+    
+   
 
   </script>
 </html>
