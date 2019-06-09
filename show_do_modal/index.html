@@ -154,6 +154,34 @@
         color: white;
       }
 
+      .passos{
+        position: absolute;
+        margin-left: 45%;
+        display: block;
+        max-height: 500px;
+        overflow-y: auto;
+        
+      }
+      .passos img{
+        
+        height: 30px;
+        
+
+      }
+
+      .passo_duplo img{
+        height: 60px;
+      }
+      .passo{
+        display: flex;
+        margin-top: 2px;
+      }
+      .passo p{
+        color: white;
+        font-size: 1.5rem;
+        margin: 0px;
+      }
+
       @media only screen and (max-width: 1500px) {
           .questao{
            width: 500px;
@@ -168,12 +196,12 @@
 
           }
 
-                #show{
-                  width: 200px;
-                  position: absolute;
-                  margin-left: 55%;
-                  margin-top: 12%;
-                }
+          #show{
+            width: 200px;
+            position: absolute;
+            margin-left: 55%;
+            margin-top: 12%;
+          }
 
       }
 
@@ -184,6 +212,66 @@
   </head>
   <body>
     <div class="passos">
+      <div class="passo" id="passo1">
+        <p>H: </p>
+        <img src="passos/passo1.png">
+      </div>
+      <div class="passo" id="passo2">
+        <p>1. </p>
+        <img src="passos/passo2.png">
+      </div>
+      <div class="passo passo_duplo" id="passo3" style="display: none">
+        <p>2. </p>
+        <img src="passos/passo3.png">
+      </div>
+      <div class="passo passo_duplo" id="passo4" style="display: none">
+        <p>3. </p>
+        <img src="passos/passo4.png">
+      </div>
+      <div class="passo" id="passo5" style="display: none">
+        <p>4. </p>
+        <img src="passos/passo5.png" >
+      </div>
+      <div class="passo passo_duplo" id="passo6" style="display: none">
+        <p>5. </p>
+        <img src="passos/passo6.png">
+      </div>
+      <div class="passo" id="passo7" style="display: none">
+        <p>6. </p>
+        <img src="passos/passo7.png">
+      </div>
+      <div class="passo" id="passo8" style="display: none">
+        <p>7. </p>
+        <img src="passos/passo8.png">
+      </div>
+      <div class="passo passo_duplo" id="passo9" style="display: none">
+        <p>8. </p>
+        <img src="passos/passo9.png">
+      </div>
+      <div class="passo" id="passo10" style="display: none">
+        <p>9. </p>
+        <img src="passos/passo10.png">
+      </div>
+      <div class="passo passo_duplo" id="passo11" style="display: none">
+        <p>10. </p>
+        <img src="passos/passo11.png">
+      </div>
+      <div class="passo" id="passo12" style="display: none">
+        <p>11. </p>
+        <img src="passos/passo12.png">
+      </div>
+      <div class="passo" id="passo13" style="display: none">
+        <p>12. </p>
+        <img src="passos/passo13.png">
+      </div>
+      <div class="passo passo_duplo" id="passo14" style="display: none">
+        <p>13. </p>
+        <img src="passos/passo14.png">
+      </div>
+      <div class="passo" id="passo15" style="display: none">
+        <p>14. </p>
+        <img src="passos/passo15.png">
+      </div>
       
     </div>
     <img  id="show" class="center" src="show.png" alt="">
@@ -254,10 +342,20 @@
 
   var questao_atual = 0;
   var perguntas = {
-    'perg1': '1',
-    'perg2': '2',
-    'perg3': '3',
-    'perg4': '4'
+    'perg1': '5',
+    'perg2': '6',
+    'perg3': '2',
+    'perg4': '4',
+    'perg5': '3',
+    'perg6': '1',
+    'perg7': '4',
+    'perg8': '2',
+    'perg9': '4',
+    'perg10': '3',
+    'perg11': '1',
+    'perg12': '4',
+    'perg13': '2'
+
 
   };
 
@@ -427,6 +525,12 @@
     
     }
 
+    function mostra_passo(){
+      var passo_id = questao_atual+2;
+      var passo = document.getElementById('passo'+passo_id);
+      passo.style.display = "flex";
+    }
+
 
     function proxima_questao(){
       var regras = ['1', '2', '3', '4'];
@@ -435,6 +539,7 @@
       esconder_alternativas();
       add_questao();
       questao_atual++;
+      mostra_passo();
 
       var regra;
       var posicao_correta = Math.floor((Math.random() * 3) + 0);
